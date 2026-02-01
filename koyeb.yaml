@@ -1,0 +1,26 @@
+# Koyeb service definition for a .NET 10 Razor Pages app
+# Docs: https://www.koyeb.com/docs
+
+name: budgetflow
+
+services:
+  - name: web
+    type: web
+    # Build the image from your GitHub repo using the Dockerfile at the root
+    # Set your repo URL after you push this code to GitHub
+    # Example: github: gorskimariusz/BudgetFlow
+    github:
+      repo: ManianOO/BudgetFlow
+      branch: main
+      # Path to Dockerfile relative to repo root
+      dockerfile: Dockerfile
+    ports:
+      - port: 8080
+        protocol: http
+    healthcheck:
+      path: "/"
+      interval: 15s
+      timeout: 2s
+    env:
+      ASPNETCORE_URLS: "http://0.0.0.0:8080"
+      ASPNETCORE_ENVIRONMENT: "Production"
